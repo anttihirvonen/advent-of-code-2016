@@ -1,5 +1,1 @@
-My solutions to AoC problems.
-
-Languages used:
-- Day 1: Julia
-- Day 2: ?
+My solutions to AoC 2016 problems in various languages.
