@@ -3,19 +3,16 @@ use std::io::prelude::*;
 use std::io::BufReader;
 use std::fs::File;
 
-fn contains_pair(s : &str) -> bool {
-    let chars : Vec<char> = s.chars().collect();
+fn contains_pair(s: &str) -> bool {
+    let chs: Vec<char> = s.chars().collect();
 
     // There must be better way to do this
-    for c in 0..(chars.len()-3) {
-        if chars[c] == chars[c+3] &&
-           chars[c+1] == chars[c+2] &&
-           chars[c] != chars[c+1]
-           {
-               return true;
-           }
+    for c in 0..(chs.len() - 3) {
+        if chs[c] == chs[c + 3] && chs[c + 1] == chs[c + 2] && chs[c] != chs[c + 1] {
+            return true;
+        }
     }
-    
+
     false
 }
 
@@ -32,8 +29,8 @@ fn main() {
             ip_tls[i % 2] |= contains_pair(s);
         }
 
-        if ip_tls[0] && !ip_tls[1] { 
-            count += 1 
+        if ip_tls[0] && !ip_tls[1] {
+            count += 1
         }
     }
 

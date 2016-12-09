@@ -2,25 +2,21 @@ use std::io::prelude::*;
 use std::io::BufReader;
 use std::fs::File;
 
-fn find_three_letter_seqs(s : &str) -> Vec<String> {
-    let chars : Vec<char> = s.chars().collect();
+fn find_three_letter_seqs(s: &str) -> Vec<String> {
+    let chars: Vec<char> = s.chars().collect();
     let mut result = Vec::new();
 
     // There must be a better way to implement this..
-    for c in 0..(chars.len()-2) {
-        //println!("{}{}{}", chars[c], chars[c+1], chars[c+2]);
-        if chars[c] == chars[c+2] &&
-           chars[c] != chars[c+1]
-           {
-              result.push(chars[c..(c+3)].iter().cloned().collect::<String>());
-              //println!("{:?}", chars);
-           }
+    for c in 0..(chars.len() - 2) {
+        if chars[c] == chars[c + 2] && chars[c] != chars[c + 1] {
+            result.push(chars[c..(c + 3)].iter().cloned().collect::<String>());
+        }
     }
-    
+
     result
 }
 
-fn supports_tls(supernet : &Vec<String>, hypernet: &Vec<String>) -> bool {
+fn supports_tls(supernet: &Vec<String>, hypernet: &Vec<String>) -> bool {
     // There is most likely a better way to do this
     for s in supernet.iter() {
         for h in hypernet.iter() {
@@ -48,8 +44,7 @@ fn main() {
         for (i, s) in v.iter().enumerate() {
             if i % 2 == 0 {
                 supernet_seqs.extend(find_three_letter_seqs(s));
-            }
-            else {
+            } else {
                 hypernet_seqs.extend(find_three_letter_seqs(s));
             }
         }
@@ -57,9 +52,6 @@ fn main() {
         if supports_tls(&supernet_seqs, &hypernet_seqs) {
             count += 1;
         }
-
-        // println!("{}", l);
-        // println!("{:?} {:?}", supernet_seqs, hypernet_seqs);
     }
 
     println!("{}", count);
